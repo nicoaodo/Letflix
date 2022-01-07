@@ -67,14 +67,32 @@
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
-            <TextView
-                android:id="@+id/textView3"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="5dp"
-                android:gravity="right"
-                android:text="Forgot Password?" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbxKeepLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#A3A3A3"
+                    android:textSize="17dp"
+                    android:gravity="left"
+                    android:text="Keep me login" />
+
+                <TextView
+                    android:id="@+id/tbxForgotPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="right"
+                    android:text="Forgot Password?" />
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/loginbtn"

@@ -2,8 +2,11 @@ package com.example.letflix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView MovieThumbnailImg,MovieCoverImg;
     private TextView tv_title,tv_description, tv_theloai, tv_director;
     private FloatingActionButton play_fab;
+    private Button share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,23 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         // ini views
         iniViews();
+
+        //share button action
+        share = findViewById(R.id.btnShare);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareSub = "Mời bạn xem.";
+                String shareBody = indexGet.name + " trên Letflix.\nĐến xem ngay: http://www.letflix.com/movie/"+ indexGet._id;
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shareIntent, "Share"));
+            }
+        });
+
+
     }
 
     void iniViews() {

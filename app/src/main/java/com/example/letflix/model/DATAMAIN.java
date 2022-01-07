@@ -7,4 +7,8 @@ public class DATAMAIN {
     public static List<MovieData> movies;
     public static List<String> theloai;
     public static List<Trending> treding;
+
+    public static TypeLink typeLink = TypeLink.none;
+    public static String valueLink;
 }
+

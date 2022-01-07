@@ -15,6 +15,7 @@ import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.TheLoai;
 import com.example.letflix.model.Trending;
+import com.example.letflix.model.TypeLink;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -34,8 +35,23 @@ public class LoadingActivity extends AppCompatActivity {
 
         Uri uri = getIntent().getData();
         if(uri != null){
-            String code = uri.toString();
-            Toast.makeText(this, "Code invite: "+ code,Toast.LENGTH_LONG).show();
+
+            String url = uri.toString();
+            url = url.split("http://www.letflix.com/")[1];
+
+            if(url.split("/").length == 2){
+                String type = url.split("/")[0];
+                String value = url.split("/")[1];
+    //            Toast.makeText(this, "Code invite: "+ type+"|"+value,Toast.LENGTH_LONG).show();
+                if(type.toLowerCase().equals("invite"))
+                    Toast.makeText(this, "Code invite: "+ value,Toast.LENGTH_LONG).show();
+                if(type.toLowerCase().equals("movie")){
+                    //set movie khi mà người dùng click vào link share phim từ người khác
+                    //này sẽ tự động mở tới detail bộ phim luôn nhưng tại vì chưa xong cái keep me login nên phải hiện cái login nữa mới bay thẳng vào detail
+                    DATAMAIN.typeLink = TypeLink.movie;
+                    DATAMAIN.valueLink = value;
+                }
+            }
         }
 
         //loading list movie
