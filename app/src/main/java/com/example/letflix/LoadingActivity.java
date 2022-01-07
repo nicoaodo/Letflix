@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
@@ -29,6 +31,12 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+
+        Uri uri = getIntent().getData();
+        if(uri != null){
+            String code = uri.toString();
+            Toast.makeText(this, "Code invite: "+ code,Toast.LENGTH_LONG).show();
+        }
 
         //loading list movie
         APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
