@@ -1,5 +1,7 @@
 package com.example.letflix;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,8 +12,12 @@ import android.util.Log;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.TheLoai;
+import com.example.letflix.model.Trending;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +37,7 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<MovieData>> call, Response<List<MovieData>> response) {
                 DATAMAIN.movies = response.body();
-                Log.d("dataGet", DATAMAIN.movies.size()+"");
+                Log.d("dataGet", DATAMAIN.movies.size()+" home");
             }
 
             @Override
@@ -41,31 +47,31 @@ public class LoadingActivity extends AppCompatActivity {
         });
 
         //loading theloai
-        Call<List<String>> callTheLoai = methods.getTheLoai("theloai");
-        callTheLoai.enqueue(new Callback<List<String>>() {
+        Call<TheLoai> callTheLoai = methods.getTheLoai("theloai");
+        callTheLoai.enqueue(new Callback<TheLoai>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                DATAMAIN.theloai = response.body();
-                Log.d("dataGet", DATAMAIN.theloai.size()+"");
+            public void onResponse(Call<TheLoai> call, Response<TheLoai> response) {
+                DATAMAIN.theloai = response.body().type;
+                Log.d("dataGet", DATAMAIN.theloai.size()+" theloai");
             }
 
             @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
+            public void onFailure(Call<TheLoai> call, Throwable t) {
                 Log.d("dataGet", t.getMessage());
             }
         });
 
         //loading trending
-        Call<List<Integer>> callTrending= methods.getTrending("trending");
-        callTrending.enqueue(new Callback<List<Integer>>() {
+        Call<List<Trending>> callTrending= methods.getTrending("trending");
+        callTrending.enqueue(new Callback<List<Trending>>() {
             @Override
-            public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
-                DATAMAIN.treding = response.body();
-                Log.d("dataGet", DATAMAIN.treding.size()+"");
+            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
+                DATAMAIN.treding =response.body();
+                Log.d("dataGet", DATAMAIN.treding.size()+" trending");
             }
 
             @Override
-            public void onFailure(Call<List<Integer>> call, Throwable t) {
+            public void onFailure(Call<List<Trending>> call, Throwable t) {
                 Log.d("dataGet", t.getMessage());
             }
         });

@@ -15,13 +15,14 @@ import com.bumptech.glide.Glide;
 import com.example.letflix.R;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.Slide;
+import com.example.letflix.model.Trending;
 
 import java.util.List;
 
 public class SliderPagerAdapter extends PagerAdapter {
     private Context mContext ;
-    private List<Integer> mList ;
-    public SliderPagerAdapter(Context mContext, List<Integer> mList) {
+    private List<Trending> mList ;
+    public SliderPagerAdapter(Context mContext, List<Trending> mList) {
         this.mContext = mContext;
         this.mList = mList;
     }
@@ -35,8 +36,8 @@ public class SliderPagerAdapter extends PagerAdapter {
         ImageView slideImg = slideLayout.findViewById(R.id.slide_img);
         TextView slideText = slideLayout.findViewById(R.id.slide_title);
 
-        Glide.with(slideText.getContext()).load(DATAMAIN.movies.get(mList.get(position)).rawImg).into(slideImg);
-        slideText.setText(DATAMAIN.movies.get(mList.get(position)).name);
+        Glide.with(slideText.getContext()).load(DATAMAIN.movies.get(mList.get(position).value).rawImg).into(slideImg);
+        slideText.setText(DATAMAIN.movies.get(mList.get(position).value).name);
 
         container.addView(slideLayout);
         return slideLayout;

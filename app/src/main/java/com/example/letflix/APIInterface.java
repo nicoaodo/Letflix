@@ -16,9 +16,9 @@ public interface APIInterface {
     Call<List<MovieData>> getListMovie(@Query("page") String page);
 
     @GET("index")
-    Call<List<String>> getTheLoai(@Query("page") String page);
+    Call<TheLoai> getTheLoai(@Query("page") String page);
 
     @GET("index")
-    Call<List<Integer>> getTrending(@Query("page") String page);
+    Call<List<Trending>> getTrending(@Query("page") String page);
 
 }

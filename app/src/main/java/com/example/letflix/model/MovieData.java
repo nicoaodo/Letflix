@@ -7,6 +7,7 @@ import java.util.List;
 //}
 
 public class MovieData{
+    public String _id;
     public String name;
     public String director;
     public String description;
