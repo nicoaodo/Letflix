@@ -75,7 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                                     return;
                                 }
                             }
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                           startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                           //startActivity(new Intent(LoginActivity.this, SocketActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }

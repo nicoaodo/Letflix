@@ -4,114 +4,212 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#000000"
     tools:context=".LoginActivity">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/textlogo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+    </ImageView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="349dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="10dp"
-                app:srcCompat="@drawable/logov" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="Letflix"
-                android:textColor="#F44336"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/emailBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textbox"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="20dp"
-                android:ems="10"
-                android:hint="Email Address"
-                android:inputType="textEmailAddress"
-                android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/passwordBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/textbox"
-                android:drawableLeft="@drawable/password"
-                android:drawablePadding="20dp"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/cbxKeepLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="#A3A3A3"
-                    android:textSize="17dp"
-                    android:gravity="left"
-                    android:text="Keep me login" />
-
-                <TextView
-                    android:id="@+id/tbxForgotPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="5dp"
-                    android:gravity="right"
-                    android:text="Forgot Password?" />
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/loginbtn"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_style"
-                android:text="Login"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/createBtn"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_style_2"
-                android:text="Create an account"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+            android:background="#2e2e2e"
+            android:hint="Email"
+            android:defaultFocusHighlightEnabled="true"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="15dp"
+            android:textColor="#c3c3c3"
+            android:textColorHint="#d1d1d1" />
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="349dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2e2e2e"
+            android:hint="Mật khẩu"
+            android:ems="10"
+
+            android:inputType="textPassword"
+            android:paddingHorizontal="15dp"
+            android:textColor="#c3c3c3"
+            android:textColorHint="#d1d1d1" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="349dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAllCaps="false"
+            android:text="Đăng nhập"
+            android:textColor="#fdfdfd"
+            android:textStyle="bold"
+            android:background="@drawable/roundedcorner"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+        <Button
+            android:id="@+id/createBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAllCaps="false"
+            android:text="Bạn mới sử dụng Letflix? Đăng ký ngay."
+            android:textColor="#fdfdfd"
+            android:background="#000000"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="50dp"-->
+<!--        android:layout_marginRight="50dp"-->
+<!--        app:cardBackgroundColor="#333333"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_marginVertical="15dp"-->
+<!--                app:srcCompat="@drawable/textlogo" />-->
+
+
+
+<!--            <EditText-->
+<!--                android:id="@+id/emailBox"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/textbox"-->
+<!--                android:drawableLeft="@drawable/email"-->
+<!--                android:drawablePadding="20dp"-->
+<!--                android:ems="10"-->
+<!--                android:hint="Email Address"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:padding="10dp" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/passwordBox"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="@drawable/textbox"-->
+<!--                android:drawableLeft="@drawable/password"-->
+<!--                android:drawablePadding="20dp"-->
+<!--                android:ems="10"-->
+<!--                android:hint="Password"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:padding="10dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/cbxKeepLogin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="3dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:textColor="#A3A3A3"-->
+<!--                    android:textSize="17dp"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Keep me login" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tbxForgotPass"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="3dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:gravity="right"-->
+<!--                    android:text="Forgot Password?" />-->
+<!--            </LinearLayout>-->
+
+
+<!--            <Button-->
+<!--                android:id="@+id/loginbtn"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@drawable/button_style"-->
+<!--                android:text="Login"-->
+<!--                android:textColor="@android:color/white" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/createBtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="@drawable/button_style_2"-->
+<!--                android:text="Create an account"-->
+<!--                android:textColor="@android:color/white" />-->
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

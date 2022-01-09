@@ -4,20 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#494545"
+    android:background="#000000"
     tools:context=".LoadingActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logov" />
-
-<!--    <ProgressBar-->
+    <!--    <ProgressBar-->
 <!--        android:id="@+id/progressBar"-->
 <!--        style="?android:attr/progressBarStyle"-->
 <!--        android:layout_width="wrap_content"-->
@@ -25,6 +15,26 @@
 <!--        app:layout_constraintEnd_toEndOf="@+id/imageView2"-->
 <!--        app:layout_constraintStart_toStartOf="@+id/imageView2"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="231dp"
+        android:layout_height="196dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418"
+        app:srcCompat="@drawable/logo" />
+
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:progressDrawable="@drawable/progressbar"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textView"
@@ -39,16 +49,13 @@
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
+    <ImageView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        android:layout_height="55dp"
         android:layout_marginTop="10dp"
-        android:text="Letflix"
-        android:textColor="#F44336"
-        android:textSize="27sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/textlogo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

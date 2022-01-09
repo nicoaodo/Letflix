@@ -4,57 +4,136 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="275dp">
+    android:layout_height="250dp">
 
     <ImageView
         android:scaleType="centerCrop"
         android:id="@+id/slide_img"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_launcher_background" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/slide_img"
+    <ImageView
+        android:id="@+id/topShadow"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/slide_img"
-        app:layout_constraintTop_toTopOf="@+id/slide_img"
-        android:src="@drawable/ic_play_arrow_black_24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/gradient_bg"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/bottomShadow"
         android:layout_width="0dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/slide_img"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/gradient_bg" />
 
     <TextView
-        android:textSize="24sp"
-        android:textColor="#ffffff"
         android:id="@+id/slide_title"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        android:maxLength="43"
+        android:paddingHorizontal="15dp"
+        android:text="Béo béo và 40 tên cướp"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/slide_img"
+        app:layout_constraintStart_toStartOf="@+id/bottomShadow"
+        app:layout_constraintTop_toTopOf="@+id/bottomShadow"
+        app:layout_constraintVertical_bias="0.328" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottomShadow">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/play_fab"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#ffffff"
+            app:cardCornerRadius="3dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_play_arrow_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:text="Xem"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
+            android:layout_toLeftOf="@id/play_fab">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_baseline_people_outline_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView4"
+                android:text="Xem chung"
+                android:textColor="#ffffff"
+                android:textSize="8sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_toRightOf="@id/play_fab">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_baseline_info_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView5"
+                android:text="Thông tin"
+                android:textColor="#ffffff"
+                android:textSize="8sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
