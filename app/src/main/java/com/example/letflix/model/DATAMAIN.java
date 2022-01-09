@@ -10,5 +10,10 @@ public class DATAMAIN {
 
     public static TypeLink typeLink = TypeLink.none;
     public static String valueLink;
+
+    public static String CACHEACCOUNT = "cacheAccount";
+
+    public static List<MovieScore> listFind;
+    public static String stringSearch;
 }
 

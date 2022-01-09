@@ -18,9 +18,12 @@ import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.TypeLink;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.stream.Collectors;
 
@@ -63,6 +66,18 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.dismiss();
                         if(task.isSuccessful())
                         {
+                            FirebaseFirestore database = FirebaseFirestore.getInstance();
+                            database.collection("Users").document("userData").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    User user = documentSnapshot.toObject(User.class);
+                                    Log.d("dataGet", "Cached document data: " + user.getName());
+                                }
+                            });
+//
+                            //boolean success = GetCacheDir.writeAllCachedText(LoginActivity.this, DATAMAIN.CACHEACCOUNT, auth.getCurrentUser().getDisplayName());
+
+
                             if(DATAMAIN.typeLink == TypeLink.movie){
                                 MovieData movieGet = null;
                                 for (int i=0;i<DATAMAIN.movies.size();i++){

@@ -88,6 +88,7 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
+            android:id="@+id/playtgt_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="60dp"
@@ -112,6 +113,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/info_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"

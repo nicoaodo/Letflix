@@ -37,8 +37,8 @@ public class SignupActivity extends AppCompatActivity {
         nameBox = findViewById(R.id.namebox);
         passwordBox = findViewById(R.id.passwordBox);
 
-        loginBtn = findViewById(R.id.loginbtn);
-        signupBtn = findViewById(R.id.createBtn);
+        loginBtn = findViewById(R.id.createBtn);
+        signupBtn = findViewById(R.id.loginbtn);
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +71,13 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
         });
     }

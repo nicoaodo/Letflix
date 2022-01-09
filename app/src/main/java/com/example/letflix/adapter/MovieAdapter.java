@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.letflix.R;
+import com.example.letflix.SearchActivity;
 import com.example.letflix.model.Movie;
 import com.example.letflix.model.MovieData;
+import com.example.letflix.model.MovieScore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
@@ -27,6 +30,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     public MovieAdapter(Context context, List<MovieData> mData, MovieItemClickListener listener) {
         this.context = context;
         this.mData = mData;
+        movieItemClickListener = listener;
+    }
+
+    public MovieAdapter(SearchActivity context, List<MovieScore> listFind, SearchActivity listener) {
+        this.context = context;
+
+        ArrayList<MovieData> mDataGet = new ArrayList<MovieData>();
+        for(int i=0;i<listFind.size();i++){
+            mDataGet.add(listFind.get(i).movie);
+        }
+        this.mData = mDataGet;
         movieItemClickListener = listener;
     }
 

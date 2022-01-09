@@ -1,19 +1,10 @@
 package com.example.letflix;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.webkit.WebChromeClient;
-import android.widget.EditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import android.webkit.WebView;
-import java.net.URISyntaxException;
-import io.socket.client.IO;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SocketActivity extends AppCompatActivity {
     WebView testWebView;

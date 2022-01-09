@@ -20,33 +20,39 @@
             android:exported="false" />
         <activity
             android:name=".MovieDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignupActivity"
             android:label="New Account"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="Login"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="Search"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".LoadingActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter tools:ignore="AppLinkUrlError">
-                <action android:name="android.intent.action.VIEW"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <category android:name="android.intent.category.BROWSABLE"></category>
+                <action android:name="android.intent.action.VIEW" />
 
-                <data android:scheme="http"
-                    android:host="www.letflix.com"></data>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.letflix.com"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
 

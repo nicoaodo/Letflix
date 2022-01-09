@@ -38,6 +38,7 @@
             android:background="#2e2e2e"
             android:hint="Email"
             android:defaultFocusHighlightEnabled="true"
+            android:text="hoangnhan26212@gmail.com"
             android:inputType="textEmailAddress"
             android:paddingHorizontal="15dp"
             android:textColor="#c3c3c3"
@@ -61,7 +62,7 @@
             android:background="#2e2e2e"
             android:hint="Mật khẩu"
             android:ems="10"
-
+            android:text="123456"
             android:inputType="textPassword"
             android:paddingHorizontal="15dp"
             android:textColor="#c3c3c3"

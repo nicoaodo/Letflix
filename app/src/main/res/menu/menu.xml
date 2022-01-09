@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
+        android:id="@+id/itemHome"
         android:icon="@drawable/ic_baseline_home_work_24"
-        android:title="Trang chủ" />
+        android:title="Trang chủ"/>
     <item
+        android:id="@+id/itemRap"
         android:icon="@drawable/ic_baseline_theaters_24"
         android:title="Rạp" />
     <item
+        android:id="@+id/itemLogout"
         android:icon="@drawable/ic_baseline_tv_off_24"
         android:title="Đăng xuất" />
 
