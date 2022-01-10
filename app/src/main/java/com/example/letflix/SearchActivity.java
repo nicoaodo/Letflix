@@ -80,6 +80,16 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
             }
         });
 
+        //logo click listener
+        ImageView btnLogo = findViewById(R.id.btnHome);
+        btnLogo.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchActivity.this, DashboardActivity.class));
+
+            }
+        });
+
 
 
 
@@ -95,7 +105,7 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
                         startActivity(new Intent(context, DashboardActivity.class));
                         break;
                     case R.id.itemRap:
-                        Toast.makeText(context, "Rạp", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(context, TheaterActivity.class));
                         break;
                     case R.id.itemLogout:
                         boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, "");

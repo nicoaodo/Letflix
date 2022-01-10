@@ -65,9 +65,9 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
         sliderpager = findViewById(R.id.slider_pager);
         indicator = findViewById(R.id.indicator);
         MoviesRV = findViewById(R.id.Rv_movies);
-        sv = findViewById(R.id.scrollView);
-        sv.setNestedScrollingEnabled(false);
-        sv.setScrollY(0);
+//        sv = findViewById(R.id.scrollView);
+//        sv.setNestedScrollingEnabled(false);
+//        sv.setScrollY(0);
         context = this;
         // list slide: list trending se tu chay tren trang chu
         if (DATAMAIN.treding.size() != 0) {
@@ -85,7 +85,7 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
 //        playAlone = sliderpager.findViewById(R.id.play_fab);
 //        infoSlide = sliderpager.findViewById(R.id.info_fab);
 //
-//        //onclick Info slide:
+        //onclick Info slide:
 //        infoSlide.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View v){
@@ -101,14 +101,14 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
         MoviesRV.setAdapter(movieAdapter);
         MoviesRV.setLayoutManager(new GridLayoutManager(this, 3));
         //logo click listener
-        ImageView btnLogo = findViewById(R.id.btnHome);
-        btnLogo.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, DashboardActivity.class));
-
-            }
-        });
+//        ImageView btnLogo = findViewById(R.id.btnHome);
+//        btnLogo.setOnClickListener(new View.OnClickListener() {
+//            //@Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(context, DashboardActivity.class));
+//
+//            }
+//        });
 
         //search click listener
         ImageView btnSearch = findViewById(R.id.btnSearch);
@@ -128,10 +128,10 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.itemHome:
-                        startActivity(new Intent(context, DashboardActivity.class));
+                        //startActivity(new Intent(context, DashboardActivity.class));
                         break;
                     case R.id.itemRap:
-                        Toast.makeText(context, "Rạp", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(context, TheaterActivity.class));
                         break;
                     case R.id.itemLogout:
                         boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, "");

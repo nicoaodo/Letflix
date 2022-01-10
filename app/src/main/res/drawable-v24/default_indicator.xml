@@ -4,11 +4,18 @@
 
     <item>
 
-        <shape android:innerRadius="0dp"
-            android:shape="ring"
-            android:thickness="3dp"
-            android:useLevel="false" >
-            <solid android:color="#2e2e2e" />
+<!--        <shape android:innerRadius="0dp"-->
+<!--            android:shape="ring"-->
+<!--            android:thickness="3dp"-->
+<!--            android:useLevel="false" >-->
+<!--            <solid android:color="#2e2e2e" />-->
+<!--        </shape>-->
+        <shape
+            android:shape="rectangle">
+            <solid android:color="#2e2e2e"/>
+            <size android:height="1dp"
+                android:width="2dp"/>
+            <corners android:radius="5dp"/>
         </shape>
 
 

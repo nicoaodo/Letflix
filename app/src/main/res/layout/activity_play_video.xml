@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".PlayVideoActivity">
 
     <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/ytPlayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ytPlayer"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

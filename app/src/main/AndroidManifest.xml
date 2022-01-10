@@ -15,10 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PlayVideoActivity"></activity>
         <activity
-            android:name=".SocketActivity"
-            android:exported="false" />
+            android:name=".TheaterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".PlayVideoActivity" />
         <activity
             android:name=".MovieDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

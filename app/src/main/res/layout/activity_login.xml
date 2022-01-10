@@ -15,7 +15,6 @@
         android:layout_marginTop="36dp"
         android:src="@drawable/textlogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -92,13 +91,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
         android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3">
+        app:layout_constraintTop_toBottomOf="@+id/forgotBtn">
 
         <Button
             android:id="@+id/createBtn"
@@ -109,6 +108,17 @@
             android:textColor="#fdfdfd"
             android:background="#000000"/>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/forgotBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:text="Quên mật khẩu?"
+        android:textAllCaps="false"
+        android:textColor="#b8b8b8"
+        app:layout_constraintEnd_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
 
 

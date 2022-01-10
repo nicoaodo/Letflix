@@ -42,102 +42,13 @@
         android:id="@+id/slide_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="43"
-        android:paddingHorizontal="15dp"
+        android:elevation="2dp"
+        android:maxLines="2"
+        android:paddingHorizontal="10dp"
         android:text="Béo béo và 40 tên cướp"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:elevation="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/slide_img"
-        app:layout_constraintStart_toStartOf="@+id/bottomShadow"
-        app:layout_constraintTop_toTopOf="@+id/bottomShadow"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:elevation="3dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomShadow">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/play_fab"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
-            android:layout_centerInParent="true"
-            android:background="#ffffff"
-            app:cardCornerRadius="3dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_play_arrow_black_24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:text="Xem"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
-
-        <RelativeLayout
-            android:id="@+id/playtgt_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="60dp"
-            android:layout_toLeftOf="@id/play_fab">
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_baseline_people_outline_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageView4"
-                android:text="Xem chung"
-                android:textColor="#ffffff"
-                android:textSize="8sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/info_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_toRightOf="@id/play_fab">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_baseline_info_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageView5"
-                android:text="Thông tin"
-                android:textColor="#ffffff"
-                android:textSize="8sp" />
-        </RelativeLayout>
-
-    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

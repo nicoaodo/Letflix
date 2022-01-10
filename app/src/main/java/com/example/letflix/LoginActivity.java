@@ -40,7 +40,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     EditText emailBox, passwordBox;
-    Button loginBtn, signupBtn;
+    Button loginBtn, signupBtn, forgotBtn;
     FirebaseAuth auth;
     ProgressDialog dialog;
 
@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn = findViewById(R.id.loginbtn);
         signupBtn = findViewById(R.id.createBtn);
+        forgotBtn = findViewById(R.id.forgotBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +137,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
+
+        forgotBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
     }

@@ -46,6 +46,16 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        //logo click listener
+        ImageView btnLogo = findViewById(R.id.btnHome);
+        btnLogo.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                startActivity(new Intent(MovieDetailActivity.this, DashboardActivity.class));
+
+            }
+        });
+
     }
 
     void iniViews() {
