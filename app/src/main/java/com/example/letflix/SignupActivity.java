@@ -93,6 +93,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
 
                             Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignupActivity.this, LoadingActivity.class));
                         } else {
                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
