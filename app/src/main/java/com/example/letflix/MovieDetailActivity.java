@@ -6,7 +6,9 @@ import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -24,9 +26,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static MovieData indexGet;
     private ImageView MovieThumbnailImg,MovieCoverImg;
     private TextView tv_title,tv_description, tv_theloai, tv_director;
-    //private Button shareBtn;
+    private ImageView btnBackHome;
     private RelativeLayout playtgt_fab, share_fab;
     private CardView  play_fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,21 +38,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         // ini views
         iniViews();
 
-        //share button action
-        share_fab = findViewById(R.id.share_fab);
-        share_fab.setOnClickListener(new View.OnClickListener() {
+        btnBackHome = findViewById(R.id.btnBackHome);
+        btnBackHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String shareSub = "Mời bạn xem.";
-                String shareBody = indexGet.name + " trên Letflix.\nĐến xem ngay: http://www.letflix.com/movie/"+ indexGet._id;
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(shareIntent, "Share"));
+                startActivity(new Intent(MovieDetailActivity.this, DashboardActivity.class));
             }
         });
-
 
     }
 
@@ -83,6 +78,31 @@ public class MovieDetailActivity extends AppCompatActivity {
         // setup animation
         MovieCoverImg.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
         //play_fab.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
+
+        //share button action
+        share_fab = findViewById(R.id.share_fab);
+        share_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareSub = "Mời bạn xem.";
+                String shareBody = indexGet.name + " trên Letflix.\nĐến xem ngay: http://www.letflix.com/movie/"+ indexGet._id;
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shareIntent, "Share"));
+            }
+        });
+
+
+        //play button action
+        play_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MovieDetailActivity.this, PlayVideoActivity.class));
+                PlayVideoActivity.movie = indexGet;
+            }
+        });
 
     }
 

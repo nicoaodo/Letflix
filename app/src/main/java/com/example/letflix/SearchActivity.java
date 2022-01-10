@@ -98,7 +98,9 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
                         Toast.makeText(context, "Rạp", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.itemLogout:
-                        startActivity(new Intent(context, LoginActivity.class));
+                        boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, "");
+                        if(success)
+                            startActivity(new Intent(context, LoginActivity.class));
                         break;
                 }
                 return false;

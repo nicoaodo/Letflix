@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
+import com.example.letflix.model.PostResponse;
 import com.example.letflix.model.TypeLink;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,8 +28,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -67,6 +74,28 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.dismiss();
                         if(task.isSuccessful())
                         {
+                            APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+                            Call<PostResponse> call = methods.setUser(new User("",email,password));
+                            call.enqueue(new Callback<PostResponse>() {
+                                @Override
+                                public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                                    User user = new User(response.body().message, email, password);
+                                    DATAMAIN.userLogin = user;
+
+                                    Gson gson = new Gson();
+                                    String jsonString = gson.toJson(user);
+                                    boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, jsonString);
+
+                                    if(success)
+                                        Log.d("dataGet", "Login success: "+response.body().message);
+                                }
+
+                                @Override
+                                public void onFailure(Call<PostResponse> call, Throwable t) {
+                                    Log.d("dataGet", t.getMessage());
+                                }
+                            });
+
                             FirebaseFirestore database = FirebaseFirestore.getInstance();
                             database.collection("Users").document("userData").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
@@ -77,20 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                             });
 //
                             //boolean success = GetCacheDir.writeAllCachedText(LoginActivity.this, DATAMAIN.CACHEACCOUNT, auth.getCurrentUser().getDisplayName());
-
-
-                            if(DATAMAIN.typeLink == TypeLink.movie){
-                                MovieData movieGet = null;
-                                for (int i=0;i<DATAMAIN.movies.size();i++){
-                                    if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
-                                        movieGet = DATAMAIN.movies.get(i);
-                                }
-                                if(movieGet != null){
-                                    MovieDetailActivity.indexGet = movieGet;
-                                    startActivity(new Intent(LoginActivity.this, MovieDetailActivity.class));
-                                    return;
-                                }
-                            }
                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                            //startActivity(new Intent(LoginActivity.this, SocketActivity.class));
                         } else {

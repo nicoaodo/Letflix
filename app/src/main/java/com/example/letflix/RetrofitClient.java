@@ -4,6 +4,7 @@ import com.example.letflix.model.DATAMAIN;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitClient {
     private  static Retrofit retrofit;
@@ -19,6 +20,7 @@ public class RetrofitClient {
     public  static  Retrofit getRetrofit(){
         if( retrofit == null){
             retrofit = new Retrofit.Builder().baseUrl(Base_Url)
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

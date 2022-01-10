@@ -33,8 +33,10 @@ import com.example.letflix.adapter.SliderPagerAdapter;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.Slide;
+import com.example.letflix.model.TypeLink;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Timer;
@@ -60,6 +62,22 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        if(DATAMAIN.typeLink == TypeLink.movie){
+            MovieData movieGet = null;
+            for (int i=0;i<DATAMAIN.movies.size();i++){
+                if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
+                    movieGet = DATAMAIN.movies.get(i);
+            }
+            if(movieGet != null){
+                MovieDetailActivity.indexGet = movieGet;
+                startActivity(new Intent(this, MovieDetailActivity.class));
+                DATAMAIN.typeLink = TypeLink.none;
+                DATAMAIN.valueLink = "";
+                return;
+            }
+        }
+
         sliderpager = findViewById(R.id.slider_pager);
         indicator = findViewById(R.id.indicator);
         MoviesRV = findViewById(R.id.Rv_movies);
@@ -132,7 +150,10 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
                         Toast.makeText(context, "Rạp", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.itemLogout:
-                        startActivity(new Intent(context, LoginActivity.class));
+                        boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, "");
+                        if(success)
+                            startActivity(new Intent(context, LoginActivity.class));
+
                         break;
                 }
                 return false;

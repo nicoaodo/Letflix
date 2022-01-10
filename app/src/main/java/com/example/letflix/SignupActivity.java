@@ -8,17 +8,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.letflix.model.DATAMAIN;
+import com.example.letflix.model.PostResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -62,13 +70,28 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            database.collection("Users")
-                                    .document().set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+                            APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+                            Call<PostResponse> call = methods.setUser(user);
+                            call.enqueue(new Callback<PostResponse>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                                    DATAMAIN.userLogin = user;
+
+                                    Gson gson = new Gson();
+                                    String jsonString = gson.toJson(user);
+                                    boolean success = GetCacheDir.writeAllCachedText(DATAMAIN.contextCache, DATAMAIN.CACHEACCOUNT, jsonString);
+
+                                    if(success)
+                                        Log.d("dataGet", "Signup success: "+response.body().message);
+                                }
+                                @Override
+                                public void onFailure(Call<PostResponse> call, Throwable t) {
+                                    Log.d("dataGet", t.getMessage());
                                 }
                             });
+
                             Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();

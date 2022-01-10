@@ -7,6 +7,11 @@ public class User {
 
     }
 
+    public User(String name, String email, String pass) {
+        this.name = name;
+        this.email = email;
+        this.pass = pass;
+    }
 
     public String getName() {
         return name;
@@ -14,6 +19,15 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", pass='" + pass + '\'' +
+                '}';
     }
 
     public String getEmail() {
