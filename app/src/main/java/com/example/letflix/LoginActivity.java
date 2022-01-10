@@ -1,5 +1,8 @@
 package com.example.letflix;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,9 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText emailBox, passwordBox;
     Button loginBtn, signupBtn;
-
     FirebaseAuth auth;
-
     ProgressDialog dialog;
 
     @Override
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dialog = new ProgressDialog(this);
-        dialog.setMessage("Please wait...");
+        dialog.setMessage("Đang kiểm tra thông tin");
         auth = FirebaseAuth.getInstance();
 
         emailBox = findViewById(R.id.emailBox);
@@ -106,5 +107,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
+    }
+
+
+
+    private void hideNavigationBar(){
+        //Hide nav gesture
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }

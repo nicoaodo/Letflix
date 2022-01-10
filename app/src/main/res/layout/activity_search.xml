@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".DashboardActivity">
+    tools:context=".SearchActivity">
 
 
     <RelativeLayout
@@ -15,8 +15,8 @@
         android:elevation="3dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
         android:paddingTop="15dp"
+        android:paddingHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,48 +24,70 @@
         tools:layout_editor_absoluteY="0dp">
 
         <ImageView
+            android:id="@+id/btn_go_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+        <ImageView
             android:id="@+id/btnHome"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:clickable="true"
             android:elevation="3dp"
             android:focusable="true"
             android:src="@drawable/logo" />
 
-        <ImageView
-            android:id="@+id/btnSearch"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_baseline_search_24" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tbxSearch"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:layout_centerInParent="true"
-            android:background="#2e2e2e"
-            android:defaultFocusHighlightEnabled="true"
-            android:hint="Find..."
-            android:inputType="textEmailAddress"
-            android:layout_marginTop="15dp"
-            android:paddingHorizontal="15dp"
-            android:textColor="#c3c3c3"
-            android:textColorHint="#d1d1d1" />
+
+
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/btnSearch"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:elevation="1dp"
+        android:alpha="0.3"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/tbxSearch"
+        app:layout_constraintEnd_toEndOf="@+id/tbxSearch"
+        app:layout_constraintTop_toTopOf="@+id/tbxSearch" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tbxSearch"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#2e2e2e"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:defaultFocusHighlightEnabled="true"
+        android:hint="Tìm kiếm"
+        android:inputType="textEmailAddress"
+        android:paddingRight="30dp"
+        android:paddingLeft="15dp"
+        android:textColor="#ffffff"
+        android:textColorHint="#585858"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Rv_movies"
         android:layout_width="match_parent"
         android:layout_height="580dp"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbxMessage"
+        app:layout_constraintTop_toBottomOf="@+id/tbxSearch"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -87,12 +109,12 @@
         android:id="@+id/tbxMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#D3CFCF"
         android:text=""
+        android:textColor="#D3CFCF"
         android:textSize="15dp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="74dp"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"/>
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="@+id/Rv_movies"
+        app:layout_constraintStart_toStartOf="@+id/Rv_movies"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

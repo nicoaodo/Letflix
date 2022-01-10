@@ -1,5 +1,8 @@
 package com.example.letflix;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -66,44 +69,16 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
             MoviesRV.setLayoutManager(new GridLayoutManager(this, 3));
         }
 
-
         //search click listener
+
         ImageView btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
-            //@Override
             @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
             public void onClick(View v) {
-                ArrayList<MovieScore> listGet = new ArrayList<MovieScore>();
-
-                if (stringSearch.getText().toString().length() == 0)
-                    return;
-                DATAMAIN.stringSearch = stringSearch.getText().toString();
-                for (int i = 0; i < DATAMAIN.movies.size(); i++) {
-                    int scoreName = FuzzySearch.tokenSortPartialRatio(stringSearch.getText().toString(), DATAMAIN.movies.get(i).name);
-                    int scoreDirector = FuzzySearch.tokenSortPartialRatio(stringSearch.getText().toString(), DATAMAIN.movies.get(i).director);
-
-                    if (scoreName < scoreFind && scoreDirector < scoreFind)
-                        continue;
-
-                    if (scoreName < scoreDirector) scoreName = scoreDirector;
-                    MovieScore movieGet = new MovieScore(DATAMAIN.movies.get(i), scoreName);
-                    listGet.add(movieGet);
-                }
-
-                Collections.sort(listGet, new Comparator<MovieScore>() {
-                    public int compare(MovieScore i1, MovieScore i2) {
-                        return i1.score - i2.score;
-                    }
-                }.reversed());
-                DATAMAIN.listFind = listGet;
-
-                for (int i = 0; i < DATAMAIN.listFind.size(); i++) {
-                    Log.d("dataGet", DATAMAIN.listFind.get(i).movie.name+"|" + DATAMAIN.listFind.get(i).score);
-                }
-                startActivity(new Intent(context, SearchActivity.class));
+                search();
             }
         });
-
 
 
 
@@ -148,8 +123,49 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
 
         Toast.makeText(this,"item clicked : " + movie.name,Toast.LENGTH_LONG).show();
         // it works great
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void search(){
+        ArrayList<MovieScore> listGet = new ArrayList<MovieScore>();
+
+        if (stringSearch.getText().toString().length() == 0)
+            return;
+        DATAMAIN.stringSearch = stringSearch.getText().toString();
+        for (int i = 0; i < DATAMAIN.movies.size(); i++) {
+            int scoreName = FuzzySearch.tokenSortPartialRatio(stringSearch.getText().toString(), DATAMAIN.movies.get(i).name);
+            int scoreDirector = FuzzySearch.tokenSortPartialRatio(stringSearch.getText().toString(), DATAMAIN.movies.get(i).director);
+
+            if (scoreName < scoreFind && scoreDirector < scoreFind)
+                continue;
+
+            if (scoreName < scoreDirector) scoreName = scoreDirector;
+            MovieScore movieGet = new MovieScore(DATAMAIN.movies.get(i), scoreName);
+            listGet.add(movieGet);
+        }
+
+        Collections.sort(listGet, new Comparator<MovieScore>() {
+            public int compare(MovieScore i1, MovieScore i2) {
+                return i1.score - i2.score;
+            }
+        }.reversed());
+        DATAMAIN.listFind = listGet;
+
+        for (int i = 0; i < DATAMAIN.listFind.size(); i++) {
+            Log.d("dataGet", DATAMAIN.listFind.get(i).movie.name+"|" + DATAMAIN.listFind.get(i).score);
+        }
+        startActivity(new Intent(context, SearchActivity.class));
+    }
 
 
+
+    private void hideNavigationBar(){
+        //Hide nav gesture
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }
 

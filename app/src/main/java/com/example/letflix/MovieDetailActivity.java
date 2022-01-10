@@ -1,6 +1,10 @@
 package com.example.letflix;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,8 +24,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static MovieData indexGet;
     private ImageView MovieThumbnailImg,MovieCoverImg;
     private TextView tv_title,tv_description, tv_theloai, tv_director;
-    private FloatingActionButton play_fab;
-    private Button share;
+    //private Button shareBtn;
+    private RelativeLayout playtgt_fab, share_fab;
+    private CardView  play_fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +36,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         iniViews();
 
         //share button action
-        share = findViewById(R.id.btnShare);
-        share.setOnClickListener(new View.OnClickListener() {
+        share_fab = findViewById(R.id.share_fab);
+        share_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -49,7 +55,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     void iniViews() {
         play_fab = findViewById(R.id.play_fab);
-
+        playtgt_fab = findViewById(R.id.playtgt_fab);
         tv_title = findViewById(R.id.detail_movie_title);
         tv_description = findViewById(R.id.detail_movie_desc);
         tv_theloai = findViewById(R.id.theloai);
@@ -76,7 +82,17 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         // setup animation
         MovieCoverImg.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
-        play_fab.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
+        //play_fab.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
 
+    }
+
+
+    private void hideNavigationBar(){
+        //Hide nav gesture
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }

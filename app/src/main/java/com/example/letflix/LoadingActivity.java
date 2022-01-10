@@ -1,5 +1,8 @@
 package com.example.letflix;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.letflix.model.DATAMAIN;
@@ -33,19 +37,28 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+        //Hide nav gesture
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
+
+
+        ///Dynamic link
         Uri uri = getIntent().getData();
-        if(uri != null){
+        if (uri != null) {
 
             String url = uri.toString();
             url = url.split("http://www.letflix.com/")[1];
 
-            if(url.split("/").length == 2){
+            if (url.split("/").length == 2) {
                 String type = url.split("/")[0];
                 String value = url.split("/")[1];
-    //            Toast.makeText(this, "Code invite: "+ type+"|"+value,Toast.LENGTH_LONG).show();
-                if(type.toLowerCase().equals("invite"))
-                    Toast.makeText(this, "Code invite: "+ value,Toast.LENGTH_LONG).show();
-                if(type.toLowerCase().equals("movie")){
+                //            Toast.makeText(this, "Code invite: "+ type+"|"+value,Toast.LENGTH_LONG).show();
+                if (type.toLowerCase().equals("invite"))
+                    Toast.makeText(this, "Code invite: " + value, Toast.LENGTH_LONG).show();
+                if (type.toLowerCase().equals("movie")) {
                     //set movie khi mà người dùng click vào link share phim từ người khác
                     //này sẽ tự động mở tới detail bộ phim luôn nhưng tại vì chưa xong cái keep me login nên phải hiện cái login nữa mới bay thẳng vào detail
                     DATAMAIN.typeLink = TypeLink.movie;
@@ -61,7 +74,7 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<MovieData>> call, Response<List<MovieData>> response) {
                 DATAMAIN.movies = response.body();
-                Log.d("dataGet", DATAMAIN.movies.size()+" home");
+                Log.d("dataGet", DATAMAIN.movies.size() + " home");
             }
 
             @Override
@@ -76,7 +89,7 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TheLoai> call, Response<TheLoai> response) {
                 DATAMAIN.theloai = response.body().type;
-                Log.d("dataGet", DATAMAIN.theloai.size()+" theloai");
+                Log.d("dataGet", DATAMAIN.theloai.size() + " theloai");
             }
 
             @Override
@@ -86,12 +99,12 @@ public class LoadingActivity extends AppCompatActivity {
         });
 
         //loading trending
-        Call<List<Trending>> callTrending= methods.getTrending("trending");
+        Call<List<Trending>> callTrending = methods.getTrending("trending");
         callTrending.enqueue(new Callback<List<Trending>>() {
             @Override
             public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
-                DATAMAIN.treding =response.body();
-                Log.d("dataGet", DATAMAIN.treding.size()+" trending");
+                DATAMAIN.treding = response.body();
+                Log.d("dataGet", DATAMAIN.treding.size() + " trending");
             }
 
             @Override
@@ -106,6 +119,6 @@ public class LoadingActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
             }
-    },3000);
+        }, 3000);
     }
 }
