@@ -62,22 +62,6 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-        if(DATAMAIN.typeLink == TypeLink.movie){
-            MovieData movieGet = null;
-            for (int i=0;i<DATAMAIN.movies.size();i++){
-                if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
-                    movieGet = DATAMAIN.movies.get(i);
-            }
-            if(movieGet != null){
-                MovieDetailActivity.indexGet = movieGet;
-                startActivity(new Intent(this, MovieDetailActivity.class));
-                DATAMAIN.typeLink = TypeLink.none;
-                DATAMAIN.valueLink = "";
-                return;
-            }
-        }
-
         sliderpager = findViewById(R.id.slider_pager);
         indicator = findViewById(R.id.indicator);
         MoviesRV = findViewById(R.id.Rv_movies);
@@ -159,6 +143,22 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
                 return false;
             }
         });
+
+        if(DATAMAIN.typeLink == TypeLink.movie){
+            MovieData movieGet = null;
+            for (int i=0;i<DATAMAIN.movies.size();i++){
+                if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
+                    movieGet = DATAMAIN.movies.get(i);
+            }
+            if(movieGet != null){
+                MovieDetailActivity.indexGet = movieGet;
+                startActivity(new Intent(this, MovieDetailActivity.class));
+                DATAMAIN.typeLink = TypeLink.none;
+                DATAMAIN.valueLink = "";
+                return;
+            }
+        }
+
     }
 
     @Override

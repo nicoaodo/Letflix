@@ -88,6 +88,22 @@ public class LoginActivity extends AppCompatActivity {
 
                                     if(success)
                                         Log.d("dataGet", "Login success: "+response.body().message);
+
+                                    if(DATAMAIN.typeLink == TypeLink.movie){
+                                        MovieData movieGet = null;
+                                        for (int i=0;i<DATAMAIN.movies.size();i++){
+                                            if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
+                                                movieGet = DATAMAIN.movies.get(i);
+                                        }
+                                        if(movieGet != null){
+                                            MovieDetailActivity.indexGet = movieGet;
+                                            startActivity(new Intent(LoginActivity.this, MovieDetailActivity.class));
+                                            DATAMAIN.typeLink = TypeLink.none;
+                                            DATAMAIN.valueLink = "";
+                                            return;
+                                        }
+                                    }
+
                                 }
 
                                 @Override
