@@ -64,11 +64,6 @@ public class TheaterActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
         //logo click listener
         ImageView btnLogo = findViewById(R.id.btnHome);
         btnLogo.setOnClickListener(new View.OnClickListener() {

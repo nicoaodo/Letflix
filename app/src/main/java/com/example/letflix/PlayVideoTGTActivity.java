@@ -2,6 +2,8 @@ package com.example.letflix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.DATAMAIN;
@@ -37,7 +41,37 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
     private String URLVideoJoin = "http://20.192.4.125:8000/watch/";
     private String URLChat = "http://20.192.4.125:3000/";
 
-    protected void onDestroy() {
+//    @SuppressLint("MissingSuperCall")
+//    @Override
+//    protected void onDestroy() {
+//
+//        //khi thằng chỉ phòng rời thì sẽ xóa code id
+//        //và code cũ k join được nữa
+//        //nhưng mấy thằng vẫn đang còn trong phòng sẽ vẫn xem bình thường k ảnh hưởng
+//        //chỉ là k join đc nữa thôi
+//        if(!isStart) return;
+//        //loading remove room
+//        APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+//        Call<CheckRoom> call = methods.leaveRoom(code);
+//        call.enqueue(new Callback<CheckRoom>() {
+//            @Override
+//            public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+//                Log.d("dataGet", response.body().status + " Room remove");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CheckRoom> call, Throwable t) {
+//                Log.d("dataGet", t.getMessage());
+//            }
+//        });
+//
+//        Log.d("dataGet", "exit");
+//        //super.onDestroy();
+//    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();  // Always call the superclass method first
         //khi thằng chỉ phòng rời thì sẽ xóa code id
         //và code cũ k join được nữa
         //nhưng mấy thằng vẫn đang còn trong phòng sẽ vẫn xem bình thường k ảnh hưởng
@@ -59,13 +93,13 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
         });
 
         Log.d("dataGet", "exit");
-        super.onDestroy();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video_t_g_t);
+        DATAMAIN.typeLink = null;
+
         webVideo = findViewById(R.id.viewPlay);
         webChat = findViewById(R.id.viewChat);
 
@@ -103,6 +137,25 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+
+        //share button action
+        ImageView share_fab = findViewById(R.id.btnShare);
+        share_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareSub = "Mời bạn xem.";
+                String shareBody = "Xem cùng "+ DATAMAIN.userLogin.getName() + " trên Letflix.\nĐến xem ngay: http://www.letflix.com/invite/"+ code;
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shareIntent, "Share"));
+            }
+        });
+
+
+
     }
 
     class ChromeCreate extends WebChromeClient{

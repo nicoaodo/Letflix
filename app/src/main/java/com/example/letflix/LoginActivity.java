@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.PostResponse;
@@ -90,20 +91,42 @@ public class LoginActivity extends AppCompatActivity {
                                     if(success)
                                         Log.d("dataGet", "Login success: "+response.body().message);
 
-                                    if(DATAMAIN.typeLink == TypeLink.movie){
-                                        MovieData movieGet = null;
-                                        for (int i=0;i<DATAMAIN.movies.size();i++){
-                                            if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
-                                                movieGet = DATAMAIN.movies.get(i);
-                                        }
-                                        if(movieGet != null){
-                                            MovieDetailActivity.indexGet = movieGet;
-                                            startActivity(new Intent(LoginActivity.this, MovieDetailActivity.class));
-                                            DATAMAIN.typeLink = TypeLink.none;
-                                            DATAMAIN.valueLink = "";
-                                            return;
-                                        }
-                                    }
+//                                    if(DATAMAIN.typeLink == TypeLink.movie){
+//                                        MovieData movieGet = null;
+//                                        for (int i=0;i<DATAMAIN.movies.size();i++){
+//                                            if(DATAMAIN.movies.get(i)._id.equals(DATAMAIN.valueLink))
+//                                                movieGet = DATAMAIN.movies.get(i);
+//                                        }
+//                                        if(movieGet != null){
+//                                            MovieDetailActivity.indexGet = movieGet;
+//                                            startActivity(new Intent(LoginActivity.this, MovieDetailActivity.class));
+//                                            DATAMAIN.typeLink = TypeLink.none;
+//                                            DATAMAIN.valueLink = "";
+//                                            return;
+//                                        }
+//                                    }else if(DATAMAIN.typeLink == TypeLink.invite){
+//                                        //loading join room
+//                                        APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+//                                        Call<CheckRoom> callJoin = methods.leaveRoom(DATAMAIN.valueLink);
+//                                        callJoin.enqueue(new Callback<CheckRoom>() {
+//                                            @Override
+//                                            public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+//                                                Log.d("dataGet", response.body().status + " Room code");
+//                                                if(response.body().status){
+//                                                    startActivity(new Intent(LoginActivity.this, PlayVideoTGTActivity.class));
+//                                                    PlayVideoTGTActivity.isStart = false;
+//                                                    PlayVideoTGTActivity.code = DATAMAIN.valueLink.toUpperCase();
+//                                                }else
+//                                                    Toast.makeText(LoginActivity.this, "Code Invalid!", Toast.LENGTH_LONG).show();
+//                                            }
+//
+//                                            @Override
+//                                            public void onFailure(Call<CheckRoom> call, Throwable t) {
+//                                                Toast.makeText(LoginActivity.this, "Code Invalid!", Toast.LENGTH_LONG).show();
+//                                                Log.d("dataGet", t.getMessage());
+//                                            }
+//                                        });
+//                                    }
 
                                 }
 

@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.letflix.adapter.MovieAdapter;
 import com.example.letflix.adapter.MovieItemClickListener;
 import com.example.letflix.adapter.SliderPagerAdapter;
+import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.Slide;
@@ -41,6 +42,10 @@ import com.google.gson.Gson;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity implements MovieItemClickListener {
     WebView testWebView;
@@ -157,8 +162,33 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
                 DATAMAIN.valueLink = "";
                 return;
             }
-        }
+        }else if(DATAMAIN.typeLink == TypeLink.invite){
+            //loading join room
+            APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+            Call<CheckRoom> callJoin = methods.leaveRoom(DATAMAIN.valueLink);
+            callJoin.enqueue(new Callback<CheckRoom>() {
+                @Override
+                public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+                    Log.d("dataGet", response.body().status + " Room code");
+                    if(response.body().status){
+                        startActivity(new Intent(DashboardActivity.this, PlayVideoTGTActivity.class));
+                        PlayVideoTGTActivity.isStart = false;
+                        PlayVideoTGTActivity.code = DATAMAIN.valueLink.toUpperCase();
+                    }else
+                        Toast.makeText(DashboardActivity.this, "Code Invalid!", Toast.LENGTH_LONG).show();
 
+                    DATAMAIN.typeLink = null;
+                }
+
+                @Override
+                public void onFailure(Call<CheckRoom> call, Throwable t) {
+                    Toast.makeText(DashboardActivity.this, "Code Invalid!", Toast.LENGTH_LONG).show();
+                    Log.d("dataGet", t.getMessage());
+
+                    DATAMAIN.typeLink = null;
+                }
+            });
+        }
     }
 
     @Override

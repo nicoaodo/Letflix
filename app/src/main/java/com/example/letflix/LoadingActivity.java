@@ -57,8 +57,11 @@ public class LoadingActivity extends AppCompatActivity {
                 String type = url.split("/")[0];
                 String value = url.split("/")[1];
 //                Toast.makeText(this, "Code invite: "+ type+"|"+value,Toast.LENGTH_LONG).show();
-                if (type.toLowerCase().equals("invite"))
+                if (type.toLowerCase().equals("invite")){
+                    DATAMAIN.typeLink = TypeLink.invite;
+                    DATAMAIN.valueLink = value;
                     Toast.makeText(this, "Code invite: " + value, Toast.LENGTH_LONG).show();
+                }
                 if (type.toLowerCase().equals("movie")) {
                     DATAMAIN.typeLink = TypeLink.movie;
                     DATAMAIN.valueLink = value;
