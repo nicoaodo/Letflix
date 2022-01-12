@@ -165,7 +165,7 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
         }else if(DATAMAIN.typeLink == TypeLink.invite){
             //loading join room
             APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
-            Call<CheckRoom> callJoin = methods.leaveRoom(DATAMAIN.valueLink);
+            Call<CheckRoom> callJoin = methods.joinRoom(DATAMAIN.valueLink);
             callJoin.enqueue(new Callback<CheckRoom>() {
                 @Override
                 public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {

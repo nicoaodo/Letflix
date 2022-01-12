@@ -41,7 +41,7 @@ public class TheaterActivity extends AppCompatActivity {
 
                 //loading join room
                 APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
-                Call<CheckRoom> call = methods.leaveRoom(joinCode);
+                Call<CheckRoom> call = methods.joinRoom(joinCode);
                 call.enqueue(new Callback<CheckRoom>() {
                     @Override
                     public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
@@ -51,12 +51,12 @@ public class TheaterActivity extends AppCompatActivity {
                             PlayVideoTGTActivity.isStart = false;
                             PlayVideoTGTActivity.code = joinCode.toUpperCase();
                         }else
-                            Toast.makeText(context, "Room not found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Code Invalid!", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Call<CheckRoom> call, Throwable t) {
-                        Toast.makeText(context, "Room not found!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Code Invalid!", Toast.LENGTH_LONG).show();
                         Log.d("dataGet", t.getMessage());
                     }
                 });
