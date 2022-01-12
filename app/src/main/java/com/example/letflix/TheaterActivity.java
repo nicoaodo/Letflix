@@ -49,7 +49,7 @@ public class TheaterActivity extends AppCompatActivity {
                         if(response.body().status){
                             startActivity(new Intent(TheaterActivity.this, PlayVideoTGTActivity.class));
                             PlayVideoTGTActivity.isStart = false;
-                            PlayVideoTGTActivity.code = joinCode;
+                            PlayVideoTGTActivity.code = joinCode.toLowerCase();
                         }else
                             Toast.makeText(context, "Room not found!", Toast.LENGTH_LONG).show();
                     }
