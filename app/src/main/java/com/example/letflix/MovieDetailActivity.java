@@ -114,6 +114,15 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        playtgt_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MovieDetailActivity.this, PlayVideoTGTActivity.class));
+                PlayVideoTGTActivity.isStart = true;
+                PlayVideoTGTActivity.url = indexGet.url;
+            }
+        });
+
     }
 
 

@@ -60,8 +60,6 @@ public class LoadingActivity extends AppCompatActivity {
                 if (type.toLowerCase().equals("invite"))
                     Toast.makeText(this, "Code invite: " + value, Toast.LENGTH_LONG).show();
                 if (type.toLowerCase().equals("movie")) {
-                    //set movie khi mà người dùng click vào link share phim từ người khác
-                    //này sẽ tự động mở tới detail bộ phim luôn nhưng tại vì chưa xong cái keep me login nên phải hiện cái login nữa mới bay thẳng vào detail
                     DATAMAIN.typeLink = TypeLink.movie;
                     DATAMAIN.valueLink = value;
                 }
