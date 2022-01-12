@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.DATAMAIN;
+import com.example.letflix.model.PostResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TheaterActivity extends AppCompatActivity {
 
@@ -31,7 +38,28 @@ public class TheaterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String joinCode = codeBox.getText().toString();
-                Toast.makeText(context, joinCode, Toast.LENGTH_LONG).show();
+
+                //loading join room
+                APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+                Call<CheckRoom> call = methods.leaveRoom(joinCode);
+                call.enqueue(new Callback<CheckRoom>() {
+                    @Override
+                    public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+                        Log.d("dataGet", response.body().status + " Room code");
+                        if(response.body().status){
+                            startActivity(new Intent(TheaterActivity.this, PlayVideoTGTActivity.class));
+                            PlayVideoTGTActivity.isStart = false;
+                            PlayVideoTGTActivity.code = joinCode;
+                        }else
+                            Toast.makeText(context, "Room not found!", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CheckRoom> call, Throwable t) {
+                        Toast.makeText(context, "Room not found!", Toast.LENGTH_LONG).show();
+                        Log.d("dataGet", t.getMessage());
+                    }
+                });
             }
         });
 

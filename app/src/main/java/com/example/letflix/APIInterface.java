@@ -1,5 +1,6 @@
 package com.example.letflix;
 
+import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.MovieData;
 import com.example.letflix.model.PostResponse;
 import com.example.letflix.model.TheLoai;
@@ -29,5 +30,14 @@ public interface APIInterface {
 
     @POST("import/users")
     Call<PostResponse> setUser(@Body User body);
+
+    @GET("create")
+    Call<PostResponse> createRoom();
+
+    @GET("join")
+    Call<CheckRoom> joinRoom(@Query("code") String page);
+
+    @GET("leave")
+    Call<CheckRoom> leaveRoom(@Query("code") String page);
 
 }

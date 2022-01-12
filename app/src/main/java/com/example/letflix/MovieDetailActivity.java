@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -20,7 +21,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
+import com.example.letflix.model.PostResponse;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MovieDetailActivity extends AppCompatActivity {
     public static MovieData indexGet;
@@ -117,9 +125,27 @@ public class MovieDetailActivity extends AppCompatActivity {
         playtgt_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MovieDetailActivity.this, PlayVideoTGTActivity.class));
-                PlayVideoTGTActivity.isStart = true;
-                PlayVideoTGTActivity.url = indexGet.url;
+
+                //req create room
+                APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+                Call<PostResponse> call = methods.createRoom();
+                call.enqueue(new Callback<PostResponse>() {
+                    @Override
+                    public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                        Log.d("dataGet", response.body().message + " Room");
+                        startActivity(new Intent(MovieDetailActivity.this, PlayVideoTGTActivity.class));
+                        PlayVideoTGTActivity.code = response.body().message;
+                        PlayVideoTGTActivity.isStart = true;
+                        PlayVideoTGTActivity.url = indexGet.url;
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostResponse> call, Throwable t) {
+                        Log.d("dataGet", t.getMessage());
+                    }
+                });
+
+
             }
         });
 

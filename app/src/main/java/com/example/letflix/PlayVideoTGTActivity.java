@@ -13,11 +13,19 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import com.example.letflix.model.CheckRoom;
 import com.example.letflix.model.DATAMAIN;
+import com.example.letflix.model.MovieData;
+import com.example.letflix.model.PostResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlayVideoTGTActivity extends AppCompatActivity {
     public static String code = "Test";
@@ -26,7 +34,34 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
 
     private WebView webVideo, webChat;
     private String URLVideo = "http://20.192.4.125:8000/start/";
+    private String URLVideoJoin = "http://20.192.4.125:8000/watch/";
     private String URLChat = "http://20.192.4.125:3000/";
+
+    protected void onDestroy() {
+        //khi thằng chỉ phòng rời thì sẽ xóa code id
+        //và code cũ k join được nữa
+        //nhưng mấy thằng vẫn đang còn trong phòng sẽ vẫn xem bình thường k ảnh hưởng
+        //chỉ là k join đc nữa thôi
+        if(!isStart) return;
+        //loading remove room
+        APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+        Call<CheckRoom> call = methods.leaveRoom(code);
+        call.enqueue(new Callback<CheckRoom>() {
+            @Override
+            public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+                Log.d("dataGet", response.body().status + " Room remove");
+            }
+
+            @Override
+            public void onFailure(Call<CheckRoom> call, Throwable t) {
+                Log.d("dataGet", t.getMessage());
+            }
+        });
+
+        Log.d("dataGet", "exit");
+        super.onDestroy();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,23 +79,29 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
         webChat.setWebViewClient(new WebViewClient());
         webChat.setWebChromeClient(new ChromeCreate());
 
-        if(isStart){
-            try {
-                url = URLEncoder.encode(url, String.valueOf(StandardCharsets.UTF_8));
-                if(url.length()==0) return;
-                url = URLVideo+code+"/"+url;
+        try {
+            if(isStart){
+                    url = URLEncoder.encode(url, String.valueOf(StandardCharsets.UTF_8));
+                    if(url.length()==0) return;
+                    url = URLVideo+code+"/"+url;
+                    webVideo.loadUrl(url);
+                    Log.d("dataGet", url +" Video");
+
+                    url = URLChat+code+"/"+ DATAMAIN.userLogin.getName();
+                    webChat.loadUrl(url);
+                    Log.d("dataGet", url +" chat");
+
+            }else {
+                url = URLVideoJoin + code;
                 webVideo.loadUrl(url);
                 Log.d("dataGet", url +" Video");
-//                webVideo.setVisibility(View.VISIBLE);
 
                 url = URLChat+code+"/"+ DATAMAIN.userLogin.getName();
                 webChat.loadUrl(url);
-//                webChat.setVisibility(View.VISIBLE);
-
                 Log.d("dataGet", url +" chat");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
