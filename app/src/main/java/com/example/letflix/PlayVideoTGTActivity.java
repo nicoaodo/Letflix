@@ -1,11 +1,16 @@
 package com.example.letflix;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +20,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.letflix.model.CheckRoom;
@@ -25,6 +31,7 @@ import com.example.letflix.model.PostResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.security.Permission;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,11 +42,16 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
     public static String code = "Test";
     public static boolean isStart = false;
     public static String url;
-
-    private WebView webVideo, webChat;
+    private CardView toggleChat, toggle_mic, toggle_camera, btnShare, videoSection, chatSection, meetSection;
+    private ImageView chatCollapse;
+    private WebView webVideo, webChat, webMeet;
+    private RelativeLayout buttonPanel;
+    private Permission permissionCamera, permissionAudio;
     private String URLVideo = "http://20.192.4.125:8000/start/";
     private String URLVideoJoin = "http://20.192.4.125:8000/watch/";
     private String URLChat = "http://20.192.4.125:3000/";
+    private String URLMeet = "https://20.192.4.125/";
+    private static final int REQUEST_CODE = 10;
 
 //    @SuppressLint("MissingSuperCall")
 //    @Override
@@ -100,8 +112,29 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_video_t_g_t);
         DATAMAIN.typeLink = null;
 
+        checkForPermission();
+
+
+
+        buttonPanel = findViewById(R.id.buttonPanel);
+        videoSection = findViewById(R.id.videoSection);
+        chatSection = findViewById(R.id.chatSection);
+        meetSection = findViewById(R.id.meetSection);
+
+        webMeet = findViewById(R.id.viewMeet);
         webVideo = findViewById(R.id.viewPlay);
         webChat = findViewById(R.id.viewChat);
+
+        videoSection.setVisibility(View.VISIBLE);
+        chatSection.setVisibility(View.INVISIBLE);
+
+        WebSettings webSettingsMeet = webMeet.getSettings();
+        webSettingsMeet.setJavaScriptEnabled(true);
+        webSettingsMeet.setMediaPlaybackRequiresUserGesture(false);
+//        webMeet.addJavascriptInterface();
+        webMeet.setWebViewClient(new WebViewClient());
+        webMeet.setWebChromeClient(new ChromeCreate());
+
 
         WebSettings webSettings = webVideo.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -125,6 +158,10 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
                     webChat.loadUrl(url);
                     Log.d("dataGet", url +" chat");
 
+                    url = URLMeet+code;
+                    webMeet.loadUrl(url);
+                    Log.d("dataGet", url +" meet");
+
             }else {
                 url = URLVideoJoin + code;
                 webVideo.loadUrl(url);
@@ -133,6 +170,10 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
                 url = URLChat+code+"/"+ DATAMAIN.userLogin.getName();
                 webChat.loadUrl(url);
                 Log.d("dataGet", url +" chat");
+
+                url = URLMeet+code;
+                webMeet.loadUrl(url);
+                Log.d("dataGet", url +" meet");
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -140,8 +181,8 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
 
 
         //share button action
-        ImageView share_fab = findViewById(R.id.btnShare);
-        share_fab.setOnClickListener(new View.OnClickListener() {
+        btnShare = findViewById(R.id.btnShare);
+        btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -154,8 +195,59 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
             }
         });
 
+        toggleChat = findViewById(R.id.toggle_chat);
+        toggleChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chatSection.setVisibility(View.VISIBLE);
+                buttonPanel.setVisibility(View.INVISIBLE);
+                meetSection.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        chatCollapse = findViewById(R.id.chatCollapse);
+        chatCollapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonPanel.setVisibility(View.VISIBLE);
+                chatSection.setVisibility(View.INVISIBLE);
+                meetSection.setVisibility(View.VISIBLE);
+            }
+        });
 
 
+
+        toggle_camera = findViewById(R.id.toggle_camera);
+        toggle_mic = findViewById(R.id.toggle_mic);
+
+
+
+
+
+    }
+
+    private void checkForPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+
+        if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        } else {
+            String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+            requestPermissions(permissions, REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Granted" , Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Denied" , Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     class ChromeCreate extends WebChromeClient{
