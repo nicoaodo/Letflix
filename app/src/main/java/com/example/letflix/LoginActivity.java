@@ -186,4 +186,9 @@ public class LoginActivity extends AppCompatActivity {
                 | SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

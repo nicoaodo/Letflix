@@ -53,6 +53,34 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
     private String URLMeet = "https://20.192.4.125/";
     private static final int REQUEST_CODE = 10;
 
+//    @SuppressLint("MissingSuperCall")
+//    @Override
+//    protected void onDestroy() {
+//
+//        //khi thằng chỉ phòng rời thì sẽ xóa code id
+//        //và code cũ k join được nữa
+//        //nhưng mấy thằng vẫn đang còn trong phòng sẽ vẫn xem bình thường k ảnh hưởng
+//        //chỉ là k join đc nữa thôi
+//        if(!isStart) return;
+//        //loading remove room
+//        APIInterface methods = RetrofitClient.getRetrofit().create(APIInterface.class);
+//        Call<CheckRoom> call = methods.leaveRoom(code);
+//        call.enqueue(new Callback<CheckRoom>() {
+//            @Override
+//            public void onResponse(Call<CheckRoom> call, Response<CheckRoom> response) {
+//                Log.d("dataGet", response.body().status + " Room remove");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CheckRoom> call, Throwable t) {
+//                Log.d("dataGet", t.getMessage());
+//            }
+//        });
+//
+//        Log.d("dataGet", "exit");
+//        //super.onDestroy();
+//    }
+
     @Override
     protected void onStop() {
         super.onStop();  // Always call the superclass method first
@@ -187,8 +215,14 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
             }
         });
 
+
+
         toggle_camera = findViewById(R.id.toggle_camera);
         toggle_mic = findViewById(R.id.toggle_mic);
+
+
+
+
 
     }
 
@@ -214,6 +248,9 @@ public class PlayVideoTGTActivity extends AppCompatActivity {
                 Toast.makeText(this, "Denied" , Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void onPeerConnected() {
     }
 
     class ChromeCreate extends WebChromeClient{

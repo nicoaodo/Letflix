@@ -61,7 +61,7 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
 
         if(DATAMAIN.listFind != null){
             if(DATAMAIN.listFind.size() ==0)
-                stringMessage.setText("Not found for \""+DATAMAIN.stringSearch+"\"");
+                stringMessage.setText("Không tìm thấy \""+DATAMAIN.stringSearch+"\"");
             stringSearch.setText(DATAMAIN.stringSearch);
             // list movie nay hien ra het data movie
             MovieAdapter movieAdapter = new MovieAdapter(this,DATAMAIN.listFind, this);
@@ -138,8 +138,8 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
         MovieDetailActivity.indexGet = movie;
 
 
-        Toast.makeText(this,"item clicked : " + movie.name,Toast.LENGTH_LONG).show();
-        // it works great
+        //Toast.makeText(this,"item clicked : " + movie.name,Toast.LENGTH_LONG).show();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

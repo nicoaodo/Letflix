@@ -202,9 +202,12 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
 
                 }
             });
-
-
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 }

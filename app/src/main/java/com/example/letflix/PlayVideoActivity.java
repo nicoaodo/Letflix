@@ -1,14 +1,7 @@
 package com.example.letflix;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.MovieData;
@@ -32,27 +25,16 @@ public class PlayVideoActivity extends YouTubeBaseActivity {
         ytPlayer.initialize(
                 api_key,
                 new YouTubePlayer.OnInitializedListener() {
-                    // Implement two methods by clicking on red
-                    // error bulb inside onInitializationSuccess
-                    // method add the video link or the playlist
-                    // link that you want to play In here we
-                    // also handle the play and pause
-                    // functionality
                     @Override
                     public void onInitializationSuccess(
                             YouTubePlayer.Provider provider,
                             YouTubePlayer youTubePlayer, boolean b) {
                         youTubePlayer.loadVideo(idVideo);
                         youTubePlayer.play();
-                        youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
                         youTubePlayer.setFullscreen(true);
                         youTubePlayer.setShowFullscreenButton(false);
                     }
 
-
-                    // Inside onInitializationFailure
-                    // implement the failure functionality
-                    // Here we will show toast
                     @Override
                     public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                         YouTubeInitializationResult
