@@ -69,6 +69,11 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailBox.getText().toString();
                 password = passwordBox.getText().toString();
 
+                if(email.equals("") || password.equals("")){
+                    Toast.makeText(LoginActivity.this, "Thông tin không được để trống!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override

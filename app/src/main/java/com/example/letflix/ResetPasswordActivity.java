@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email = emailBox.getText().toString();
+                if(email.equals("")){
+                    Toast.makeText(ResetPasswordActivity.this, "Không thành công, vui lòng kiểm tra lại email!" , Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -39,9 +44,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ResetPasswordActivity.this, "Không thành công, vui lòng kiểm tra lại email \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResetPasswordActivity.this, "Không thành công, vui lòng kiểm tra lại email!\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        //back click listener
+        ImageView btnBack = findViewById(R.id.backBtn);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
             }
         });
 

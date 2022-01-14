@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.letflix.model.DATAMAIN;
@@ -61,6 +62,11 @@ public class SignupActivity extends AppCompatActivity {
                 pass = passwordBox.getText().toString();
                 name = nameBox.getText().toString();
 
+                if(email.equals("") || pass.equals("") || name.equals("")){
+                    Toast.makeText(SignupActivity.this, "Thông tin không được để trống!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 final User user = new User();
                 user.setEmail(email);
                 user.setPass(pass);
@@ -105,6 +111,15 @@ public class SignupActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            }
+        });
+
+        //back click listener
+        ImageView btnBack = findViewById(R.id.backBtn);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            //@Override
             public void onClick(View v) {
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
