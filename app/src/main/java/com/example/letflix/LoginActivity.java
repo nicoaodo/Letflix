@@ -54,8 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         dialog.setMessage("Đang kiểm tra thông tin");
         auth = FirebaseAuth.getInstance();
 
-        emailBox = findViewById(R.id.emailBox);
-        passwordBox = findViewById(R.id.passwordBox);
+
 
         loginBtn = findViewById(R.id.loginbtn);
         signupBtn = findViewById(R.id.createBtn);
@@ -65,12 +64,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.show();
+                emailBox = findViewById(R.id.emailBox);
+                passwordBox = findViewById(R.id.passwordBox);
                 String email, password;
                 email = emailBox.getText().toString();
                 password = passwordBox.getText().toString();
 
                 if(email.equals("") || password.equals("")){
                     Toast.makeText(LoginActivity.this, "Thông tin không được để trống!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                     return;
                 }
 
