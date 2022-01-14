@@ -86,12 +86,17 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
             //@Override
             public void onClick(View v) {
                 startActivity(new Intent(SearchActivity.this, DashboardActivity.class));
-
             }
         });
 
-
-
+        //back click listener
+        ImageView btnBack = findViewById(R.id.btn_go_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchActivity.this, DashboardActivity.class));
+            }
+        });
 
 
         //bottom view click listener

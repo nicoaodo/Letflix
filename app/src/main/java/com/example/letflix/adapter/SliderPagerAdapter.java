@@ -1,6 +1,7 @@
 package com.example.letflix.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.letflix.MovieDetailActivity;
 import com.example.letflix.R;
 import com.example.letflix.model.DATAMAIN;
 import com.example.letflix.model.Slide;
@@ -38,6 +40,14 @@ public class SliderPagerAdapter extends PagerAdapter {
 
         Glide.with(slideText.getContext()).load(DATAMAIN.movies.get(mList.get(position).value).rawImg).into(slideImg);
         slideText.setText(DATAMAIN.movies.get(mList.get(position).value).name);
+
+        slideLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mContext.startActivity(new Intent(mContext, MovieDetailActivity.class));
+                MovieDetailActivity.indexGet = DATAMAIN.movies.get(DATAMAIN.treding.get(position).value);
+            }
+        });
 
         container.addView(slideLayout);
         return slideLayout;

@@ -57,7 +57,6 @@ public class TheaterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<CheckRoom> call, Throwable t) {
                         Toast.makeText(context, "Code Invalid!", Toast.LENGTH_LONG).show();
-                        Log.d("dataGet", t.getMessage());
                     }
                 });
             }
@@ -71,6 +70,15 @@ public class TheaterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(TheaterActivity.this, DashboardActivity.class));
 
+            }
+        });
+
+        //back click listener
+        ImageView btnBack = findViewById(R.id.btn_go_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                startActivity(new Intent(TheaterActivity.this, DashboardActivity.class));
             }
         });
 

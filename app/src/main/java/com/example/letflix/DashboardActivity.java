@@ -3,12 +3,17 @@ package com.example.letflix;
 import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
 import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
+import android.app.ActionBar;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -82,38 +87,14 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
 
         // setup timer
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new DashboardActivity.SliderTimer(), 4000, 6000);
+        timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
         indicator.setupWithViewPager(sliderpager, true);
-
-//        //slide button
-//        playTGT = sliderpager.findViewById(R.id.playtgt_fab);
-//        playAlone = sliderpager.findViewById(R.id.play_fab);
-//        infoSlide = sliderpager.findViewById(R.id.info_fab);
-//
-        //onclick Info slide:
-//        infoSlide.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                startActivity(new Intent(context, MovieDetailActivity.class));
-//                MovieDetailActivity.indexGet = DATAMAIN.movies.get(DATAMAIN.treding.get(sliderpager.getCurrentItem()).value);
-//            }
-//        });
-
 
 
         // list movie nay hien ra het data movie
         MovieAdapter movieAdapter = new MovieAdapter(this, DATAMAIN.movies, this);
         MoviesRV.setAdapter(movieAdapter);
         MoviesRV.setLayoutManager(new GridLayoutManager(this, 3));
-        //logo click listener
-//        ImageView btnLogo = findViewById(R.id.btnHome);
-//        btnLogo.setOnClickListener(new View.OnClickListener() {
-//            //@Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(context, DashboardActivity.class));
-//
-//            }
-//        });
 
         //search click listener
         ImageView btnSearch = findViewById(R.id.btnSearch);
@@ -203,9 +184,6 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
 
         startActivity(intent, options.toBundle());
         MovieDetailActivity.indexGet = movie;
-
-
-        Toast.makeText(this, "item clicked : " + movie.name, Toast.LENGTH_LONG).show();
     }
 
 
@@ -222,7 +200,6 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
                     } else
                         sliderpager.setCurrentItem(0);
 
-
                 }
             });
 
@@ -230,15 +207,5 @@ public class DashboardActivity extends AppCompatActivity implements MovieItemCli
         }
     }
 
-
-
-
-    private void hideNavigationBar() {
-        //Hide nav gesture
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        decorView.setSystemUiVisibility(uiOptions);
-    }
 }
+
